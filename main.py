@@ -5,15 +5,14 @@ from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 Base = declarative_base()
 
 class Fornecedor(Base):
-    __tablename__ = "fornecedor"
+    __tablename__ = "fornecedores"
 
-    #Como criar colunas
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(100), nullable=False)
 
-    produtos = relationship("Produto", back_populates="fornecedor")
+    produtos = relationship("Produto", back_populates="fornecedores")
 
-    #Função de imprimir
+    
     def __repr__(self):
         return f"Fornecedor: ID = {self.id} - NOME = {self.nome}"
     
@@ -24,10 +23,10 @@ class Produto(Base):
     nome = Column(String(100), nullable=False)
     preco = Column(Float, nullable=False)
 
-    #ForeignKey é o que eu criar o vínuclo no banco
+   
     fornecedor_id = Column(Integer, ForeignKey("fornecedores.id"))
 
-    #Relacionamento
+    
     fornecedor = relationship("Fornecedor", back_populates="produtos")
 
     def __repr__(self):
