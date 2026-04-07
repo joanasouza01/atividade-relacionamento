@@ -76,4 +76,24 @@ def cadastrar_produto():
             session.rollback()
             print(f"deu ruim! {erro}")
 
-cadastrar_produto()
+# cadastrar_produto()
+
+#consulta
+def listar_fornecedor():
+    with Session() as session:
+        try:
+            if fornecedor == None:
+                print("Não encontrado")
+            else:
+
+                fornecedor = session.query(Fornecedor).all()
+                for f in fornecedor:
+                    print(f"\n{f}")
+                    for p in f.produtos:
+                        print(p.fornecedor)
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
+
+# listar_fornecedor()
+
